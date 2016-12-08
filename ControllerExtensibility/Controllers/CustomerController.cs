@@ -18,6 +18,7 @@ namespace ControllerExtensibility.Controllers
             });
         }
 
+        [ActionName("Enumerate")] // New action name, overrides the action name "List" below
         public ViewResult List()
         {
             return View("Result", new Result
@@ -25,6 +26,12 @@ namespace ControllerExtensibility.Controllers
                 ControllerName = "Customer",
                 ActionName = "List"
             });
+        }
+
+        [NonAction]
+        public ActionResult MyAction()
+        {
+            return View();
         }
     }
 }

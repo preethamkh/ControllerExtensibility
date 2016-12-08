@@ -8,8 +8,9 @@ using ControllerExtensibility.Models;
 
 namespace ControllerExtensibility.Controllers
 {
-    public class ProductController : Controller
+    public class HomeController : Controller
     {
+        // GET: Home
         public ActionResult Index()
         {
             return View("Result", new Result
@@ -19,14 +20,20 @@ namespace ControllerExtensibility.Controllers
             });
         }
 
-
-        public ViewResult List()
+        [Local]
+        [ActionName("Index")]
+        public ActionResult LocalIndex()
         {
             return View("Result", new Result
             {
                 ControllerName = "Product",
-                ActionName = "List"
+                ActionName = "LocalIndex"
             });
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            Response.Write(string.Format("You requested the {0} action", actionName));
         }
     }
 }
